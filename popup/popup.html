@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevDiary</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h3>DevDiary</h3>
+            <span class="status-badge" id="trackingStatus">Active</span>
+        </header>
+
+        <div class="timer-section">
+            <span class="label">Today's Focus</span>
+            <h1 id="focusTimer">00:00:00</h1>
+        </div>
+
+        <div class="actions">
+            <button id="toggleBtn" class="btn btn-secondary">Pause Tracking</button>
+            <button id="copyBtn" class="btn btn-primary">Copy Summary</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

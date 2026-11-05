@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "DevDiary - Smart Learning Tracker",
+    "version": "1.0.0",
+    "description": "Privacy-focused automated learning tracker with smart filtering and GitHub export.",
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_title": "DevDiary Dashboard"
+    }
+  }
