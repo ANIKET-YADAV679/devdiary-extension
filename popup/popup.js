@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const copyBtn = document.getElementById("copyBtn");
   const trackingStatus = document.getElementById("trackingStatus");
   const focusTimer = document.getElementById("focusTimer");
+  const domainList = document.getElementById("domainList");
+  const siteCount = document.getElementById("siteCount");
 
-  // Seconds ko HH:MM:SS format me badalne ka helper
   function formatSeconds(totalSeconds) {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -14,24 +15,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }
 
-  // Aaj ki date string (YYYY-MM-DD)
   const today = new Date().toISOString().split("T")[0];
 
-  // Storage se data uthana
   const storageData = await chrome.storage.local.get(["dailyLogs", "isTrackingPaused"]);
   const dailyLogs = storageData.dailyLogs || {};
   const todayLogs = dailyLogs[today] || {};
 
-  // Aaj ke saare domains ka time sum karo
   let totalSeconds = 0;
-  for (const domain in todayLogs) {
-    totalSeconds += todayLogs[domain];
+  const domains = Object.keys(todayLogs);
+
+  if (domains.length > 0) {
+    domainList.innerHTML = "";
+    siteCount.textContent = `${domains.length} sites`;
+
+    domains
+      .sort((a, b) => todayLogs[b] - todayLogs[a])
+      .forEach((domain) => {
+        const timeSpent = todayLogs[domain];
+        totalSeconds += timeSpent;
+
+        const li = document.createElement("li");
+        li.className = "domain-item";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "domain-name";
+        nameSpan.textContent = domain;
+
+        const timeSpan = document.createElement("span");
+        timeSpan.className = "domain-time";
+        timeSpan.textContent = formatSeconds(timeSpent);
+
+        li.appendChild(nameSpan);
+        li.appendChild(timeSpan);
+        domainList.appendChild(li);
+      });
+  } else {
+    siteCount.textContent = "0 sites";
   }
 
-  // Display timer update
   focusTimer.textContent = formatSeconds(totalSeconds);
 
-  // Tracking pause/active state sync
   let isPaused = storageData.isTrackingPaused || false;
 
   function updateStatusUI(paused) {
@@ -50,26 +73,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateStatusUI(isPaused);
 
-  // Pause / Resume toggle button listener
   toggleBtn.addEventListener("click", async () => {
     isPaused = !isPaused;
     await chrome.storage.local.set({ isTrackingPaused: isPaused });
     updateStatusUI(isPaused);
   });
 
-  // Copy Summary button: Detailed Markdown summary clipboard me bhejega
   copyBtn.addEventListener("click", () => {
     let summaryText = `# DevDiary Daily Log - ${today}\n`;
     summaryText += `**Total Focus Time:** ${formatSeconds(totalSeconds)}\n\n`;
     summaryText += `### Breakdown:\n`;
 
-    const domains = Object.keys(todayLogs);
     if (domains.length === 0) {
       summaryText += `- No activity recorded yet.\n`;
     } else {
-      domains.forEach((domain) => {
-        summaryText += `- **${domain}**: ${formatSeconds(todayLogs[domain])}\n`;
-      });
+      domains
+        .sort((a, b) => todayLogs[b] - todayLogs[a])
+        .forEach((domain) => {
+          summaryText += `- **${domain}**: ${formatSeconds(todayLogs[domain])}\n`;
+        });
     }
 
     navigator.clipboard.writeText(summaryText);
