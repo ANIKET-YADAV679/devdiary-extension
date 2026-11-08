@@ -60,13 +60,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   function updateStatusUI(paused) {
     if (paused) {
       trackingStatus.textContent = "Paused";
-      trackingStatus.style.backgroundColor = "#3b2222";
-      trackingStatus.style.color = "#e74c3c";
+      trackingStatus.style.backgroundColor = "#2b1717";
+      trackingStatus.style.color = "#ff453a";
+      trackingStatus.style.borderColor = "rgba(255, 69, 58, 0.25)";
       toggleBtn.textContent = "Resume Tracking";
     } else {
       trackingStatus.textContent = "Active";
-      trackingStatus.style.backgroundColor = "#1e3a2f";
-      trackingStatus.style.color = "#2ecc71";
+      trackingStatus.style.backgroundColor = "#172b1f";
+      trackingStatus.style.color = "#30d158";
+      trackingStatus.style.borderColor = "rgba(48, 209, 88, 0.25)";
       toggleBtn.textContent = "Pause Tracking";
     }
   }

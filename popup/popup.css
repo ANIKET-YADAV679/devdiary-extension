@@ -2,20 +2,25 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
+html,
 body {
-    width: 320px;
-    background-color: #121212;
-    color: #f5f5f5;
-    padding: 16px;
+    width: 300px;
+    background-color: #121214;
 }
 
-.container {
+.panel {
+    background: #232327;
+    border-radius: 20px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+    border: 1px solid #36363d;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 header {
@@ -25,64 +30,83 @@ header {
 }
 
 h3 {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.2px;
 }
 
 .status-badge {
-    font-size: 11px;
+    font-size: 10px;
     padding: 3px 8px;
     border-radius: 12px;
-    background-color: #1e3a2f;
-    color: #2ecc71;
+    background: #172b1f;
+    color: #30d158;
     font-weight: 600;
+    border: 1px solid rgba(48, 209, 88, 0.25);
 }
 
 .timer-section {
-    background: #1c1c1e;
-    border-radius: 8px;
-    padding: 12px;
+    background: #2b2b30;
+    border-radius: 12px;
+    padding: 12px 14px;
     text-align: center;
+    border: 1px solid #383842;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .timer-section .label {
-    font-size: 11px;
-    color: #888;
+    font-size: 10px;
+    color: #8c8c94;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    font-weight: 600;
 }
 
 .timer-section h1 {
     font-size: 28px;
     margin-top: 4px;
+    font-weight: 700;
     font-variant-numeric: tabular-nums;
     color: #ffffff;
+    letter-spacing: -0.4px;
 }
 
 .breakdown-section {
-    background: #1c1c1e;
-    border-radius: 8px;
-    padding: 12px;
+    background: #2b2b30;
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid #383842;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .breakdown-header {
     display: flex;
     justify-content: space-between;
-    font-size: 11px;
-    color: #888;
+    font-size: 10px;
+    color: #8c8c94;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    font-weight: 600;
     margin-bottom: 8px;
 }
 
 .domain-list {
     list-style: none;
-    max-height: 120px;
+    max-height: 110px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
+}
+
+.domain-list::-webkit-scrollbar {
+    width: 3px;
+}
+
+.domain-list::-webkit-scrollbar-thumb {
+    background: #44444d;
+    border-radius: 3px;
 }
 
 .domain-item {
@@ -91,13 +115,14 @@ h3 {
     align-items: center;
     font-size: 12px;
     padding: 4px 6px;
-    background: #252528;
-    border-radius: 4px;
+    background: #323238;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .domain-name {
-    color: #d1d5db;
-    max-width: 170px;
+    color: #e2e2e7;
+    max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -105,13 +130,14 @@ h3 {
 
 .domain-time {
     font-variant-numeric: tabular-nums;
-    color: #60a5fa;
+    color: #64d2ff;
     font-weight: 600;
+    font-size: 11px;
 }
 
 .empty-state {
-    font-size: 12px;
-    color: #666;
+    font-size: 11px;
+    color: #636366;
     text-align: center;
     padding: 6px 0;
 }
@@ -123,13 +149,13 @@ h3 {
 
 .btn {
     flex: 1;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #3c3c44;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: opacity 0.15s ease;
 }
 
 .btn:hover {
@@ -137,10 +163,11 @@ h3 {
 }
 
 .btn-primary {
-    background-color: #2563eb;
+    background: #3e3e46;
+    border-color: #555560;
     color: #ffffff;
 }
 
 .btn-secondary {
-    background-color: #2c2c2e;
-    color: #d1d5db; }
+    background: #2a2a2f;
+    color: #d1d1d6; }
